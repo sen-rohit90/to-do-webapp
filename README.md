@@ -97,3 +97,13 @@ Step 06: Use of QueryParam, first look at model annotation
 - Just put the key, value in the modelMap object
 - On the jsp page, access this variable with ${name} 
 
+Step 07: Logging using slf4j
+- Add details on application properties file
+        logging.level.com.todo.todowebapp.login=debug
+
+- And on class, create an instance of Logger class
+        private Logger logger = LoggerFactory.getLogger(getClass());
+
+- Use logger as per need. 
+
+- Future mini project idea: use log4j2 as the logger
