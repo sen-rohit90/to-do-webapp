@@ -107,3 +107,7 @@ Step 07: Logging using slf4j
 - Use logger as per need. 
 
 - Future mini project idea: use log4j2 as the logger
+
+Step 08: Add the login page,etc
+- Using the logic we have already seen above, let's create a simple login page
+- With the help of RequestMapping, lets define the function of GET and POST methods; GET for login page and POST for submitting credentials
