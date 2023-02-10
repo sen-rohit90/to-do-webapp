@@ -13,11 +13,13 @@ Step 01 : Creating Sprint Boot Application with Spring Initializr
 Step 02 : First Spring MVC Controls
  - Create SayHelloController.java, mark it as @Controller
  - Add in the below method
-    @RequestMapping("say-hello")
-    @ResponseBody
-    public String sayHello() {
-      return "Hello, what's up!";
-    }
+
+        @RequestMapping("say-hello")
+        @ResponseBody
+        public String sayHello() {
+          return "Hello, what's up!";
+        }
+
   - @RequestMapping is used to map URL with the bean / method
   - @ResponseBody tells that the returning string is a response. Otherwise Spring MVC looks for a view with name "Hello, what's up" - so in 
   order that the Spring MVC understands that the returning string is not a view is by adding the annotation - @ResponseBody
@@ -46,19 +48,30 @@ Step 03 : Let's return html response
 
 Step 04 : Redirect to a JSP
 - Add in the below method
-    @RequestMapping("say-hello-jsp")
-    public String sayHelloJsp() {
-      return "sayHello";
-    }
+        @RequestMapping("say-hello-jsp")
+        public String sayHelloJsp() {
+          return "sayHello";
+        }
 - Note that it returns a "sayHello" view. It is a jsp page under WEB-INF/jsp
 - This setting is defined in application.properties file as below:
     spring.mvc.view.prefix=/WEB-INF/jsp/
     spring.mvc.view.suffix=.jsp
 
+  This is how we are using the View Resolver
+
 - The jsp file is a simple html file for now. 
 - Note, we also need to add the below dependency in the pom.xml file
-    <dependency>
-			<groupId>org.apache.tomcat.embed</groupId>
-			<artifactId>tomcat-embed-jasper</artifactId>
-			<scope>provided</scope>
-		</dependency>
+      <dependency>
+        <groupId>org.apache.tomcat.embed</groupId>
+        <artifactId>tomcat-embed-jasper</artifactId>
+        <scope>provided</scope>
+      </dependency>
+
+Step 05: Adding a login controller
+- Created a simple controller class named login
+- Add the below method
+        @RequestMapping("login")
+        public String gotoLoginPage() {
+          return "login";
+        }
+- Created a login.jsp page with a basic form element.
