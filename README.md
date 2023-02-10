@@ -21,3 +21,25 @@ Step 02 : First Spring MVC Controls
   - @RequestMapping is used to map URL with the bean / method
   - @ResponseBody tells that the returning string is a response. Otherwise Spring MVC looks for a view with name "Hello, what's up" - so in 
   order that the Spring MVC understands that the returning string is not a view is by adding the annotation - @ResponseBody
+
+Step 03 : Let's return html response
+- Add in the below method
+  @RequestMapping("say-hello-html")
+	@ResponseBody
+	public String sayHelloHtml() {
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append("<html>");
+		sb.append("<head>");
+		sb.append("<title> My first HTML page</title>");
+		sb.append("</head>");
+		
+		sb.append("<body>");
+		sb.append("My first HTML body");
+		sb.append("</body>");
+		sb.append("</html>");
+		
+		return sb.toString();
+		
+	}
+- Method is cumbersome. We should explore Views to better maintain UI code. 
