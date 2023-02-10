@@ -85,3 +85,15 @@ Step 05: Adding a login controller
         }
 - Created a login.jsp page with a basic form element.
 
+Step 06: Use of QueryParam, first look at model annotation
+- To use query param, ie., a URL like http://localhost:8080/login?name=Rohit , we need to use @QueryParam in method argument
+        @RequestMapping("login")
+        public String gotoLoginPage(@RequestParam String name, ModelMap model) {
+          model.put("name", name);
+          return "login";
+        }
+
+- For the login.jsp, if the name argument has to be used, we need to use a "ModelMap"... this is very similar to identityModel.
+- Just put the key, value in the modelMap object
+- On the jsp page, access this variable with ${name} 
+

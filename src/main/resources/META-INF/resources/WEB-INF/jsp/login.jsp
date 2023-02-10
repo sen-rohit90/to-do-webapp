@@ -3,6 +3,7 @@
 <head>
 </head>
 <body>
+<p>Welcome ${ name } </p>
 	<form action="#" method="#">
 		<!-- <div class="imgcontainer">
     <img src="img_avatar2.png" alt="Avatar" class="avatar">
