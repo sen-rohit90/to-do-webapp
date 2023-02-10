@@ -111,3 +111,7 @@ Step 07: Logging using slf4j
 Step 08: Add the login page,etc
 - Using the logic we have already seen above, let's create a simple login page
 - With the help of RequestMapping, lets define the function of GET and POST methods; GET for login page and POST for submitting credentials
+
+Step 09: Creating Todo and TodoService
+- Created tthe respective classes
+- Via SessionAttribute, persisted the variable values to multiple web pages (Session Scope)
