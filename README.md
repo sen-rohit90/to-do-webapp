@@ -237,4 +237,34 @@ Step 11: Adding css, js and jquery
           todos.add(todo);
         }
   
+Step 12: Adding springboot starter validation
+  - Spring boot offers validation support to check for various form field values. Added by adding the entry to pom. 
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-validation</artifactId>
+      </dependency>
+
+  - In order to use form validation, imported as below
+      <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
+    on the todo.jsp page.
+
+  - We want to easily link the form fields with java bean - it is made possible by using the form tag along with modelAttribute tag. modelAttribute tag is 
+    put in here as todo. Using path=<name of the bean> , we can map the object.
+
+      <form:form method="post" modelAttribute="todo"> 
+          Description: <input type="text" name="description" required="required" path="description"> 
+        <form:input type="hidden" path="id"/> 
+        <form:input type="hidden" path="done"/> 
+        <input type="Submit" class="btn btn-success">
+      </form:form>
+
+  - We pass in the todo attribute to modelMap in our showNewTodoPage method
+        @RequestMapping(value="add-todo", method = RequestMethod.GET)
+        public String showNewTodoPage(ModelMap model) {
+          String usernmae = (String)model.get("name");
+          ToDo todo = new ToDo(0, usernmae, "", LocalDate.now().plusYears(1), false);
+          model.put("todo", todo);
+          return "todo";
+        } 
 
