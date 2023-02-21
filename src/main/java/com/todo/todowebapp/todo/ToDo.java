@@ -53,7 +53,7 @@ public class ToDo {
 		return targetDate;
 	}
 
-	public void setTargetDate(LocalDate targetData) {
+	public void setTargetDate(LocalDate targetDate) {
 		this.targetDate = targetDate;
 	}
 
@@ -67,7 +67,7 @@ public class ToDo {
 
 	@Override
 	public String toString() {
-		return "ToDo [id=" + id + ", username=" + username + ", description=" + description + ", targetData="
+		return "ToDo [id=" + id + ", username=" + username + ", description=" + description + ", targetDate="
 				+ targetDate + ", done=" + done + "]";
 	}
 

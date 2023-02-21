@@ -325,4 +325,68 @@ Step 13: Validation using command bean
 					</tr>
 				</c:forEach>
 
-        
+  Step 14: Adding update feature
+  - On todo controller, added a new method for Update function
+          @RequestMapping(value="update-todo", method = RequestMethod.POST)
+          public String updateTodo(ModelMap model, @Valid @ModelAttribute("todo") ToDo todo, BindingResult result) {
+            
+            if (result.hasErrors()) {
+              return "todo";
+            }
+            String usernmae = (String)model.get("name");	
+            todo.setUsername(usernmae);
+            
+            toDoService.updateTodo(todo);
+            return "redirect:list-todos";
+          } 
+
+    No new concepts here. 
+
+  - Also added another method for GET
+          @RequestMapping(value="update-todo", method = RequestMethod.GET)
+          public String showUpdateTodoPage(@RequestParam int id, ModelMap model) {
+            ToDo todo = toDoService.findById(id);
+            model.addAttribute("todo", todo);
+            return "todo";
+
+          }
+
+  - And on todoService class added the below
+          public void updateTodo(@Valid ToDo todo) {
+            // TODO Auto-generated method stub
+            deleteTodo(todo.getId());
+            todos.add(todo);
+          }
+    First deleting it and then adding new one with updated value
+
+  - On todo.jsp, using datepicker min css,js added the option of datepicker like so
+      - Link reference as below:
+          <link
+            href="webjars/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.standalone.min.css"
+            rel="stylesheet">
+          
+      - Fieldsets added
+                <fieldset class="mb-3">
+                  <form:label path="description">Description</form:label>
+                  <form:input type="text" path="description" required="required" />
+                  <form:errors path="description" cssClass="text-warning" />
+                </fieldset>
+                <fieldset class="mb-3">
+                  <form:label path="targetDate">Target Date</form:label>
+                  <form:input type="text" path="targetDate" required="required" />
+                  <form:errors path="targetDate" cssClass="text-warning" />
+                </fieldset>
+
+                
+        - added js files and js code    
+            <script
+              src="webjars/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+            <script type="text/javascript">
+              $('#targetDate').datepicker({
+                format : 'yyyy-mm-dd'
+              });
+            </script>
+
+    - On inspecting the page source, found an error in import of jquery file, updated it correctly 
+          <script src="webjars/jquery/3.6.0/jquery.min.js "></script>
+
