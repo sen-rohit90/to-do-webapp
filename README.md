@@ -112,6 +112,48 @@ Step 08: Add the login page,etc
 - Using the logic we have already seen above, let's create a simple login page
 - With the help of RequestMapping, lets define the function of GET and POST methods; GET for login page and POST for submitting credentials
 
-Step 09: Creating Todo and TodoService
-- Created tthe respective classes
+Step 09: Here on our project begins... Creating Todo and TodoService
+- For ToDo class
+    Things we will need... 
+      private int id;
+      private String username;
+      private String description;
+      private LocalDate targetData;
+      private boolean done;
+
+  Lets add getters, setters, toString and constructors for the same. 
+
+- Initially we will create a static list of todos... we will use ToDoService class for it. Marked the ToDoService class as @Service
+    Added as so:
+      static {
+        todos.add(new ToDo(1, "in28mins", "Learn AWS", LocalDate.now().plusYears(1), false));
+        todos.add(new ToDo(1, "in28mins", "Learn DevOps", LocalDate.now().plusYears(2), false));
+        todos.add(new ToDo(1, "in28mins", "Learn Full Stack", LocalDate.now().plusYears(3), false));
+
+  	  }
+
+- And create a method -> List<ToDo> findByUsername(String username) - to fetch list of all todos for a user. 
+- Next we need to create the controller class... which is ToDoController and a jsp page to display our response.
+    Using the concepts we have learnt above, let's makr our class @Controller and map our bean @RequestMapping with the jsp page. We create a ToDoController oonstructor to autowire it in.
+
+        @RequestMapping("list-todos")
+        public String listAllTodos(ModelMap model) {
+          List todos = toDoService.findByUsername("in28mins");
+          model.put("todos", todos);
+          return "listTodos";
+
+        }
+
+- Create list-todos.jsp , like so:
+        <html>
+          <title>List ToDos Page</title>
+          <head>
+          </head>
+          <body>
+            <div>Welcome ${name} .</div>
+            <div>Your to dos are :  ${todos} .</div>
+          </body>
+          </form>
+        </html>
+
 - Via SessionAttribute, persisted the variable values to multiple web pages (Session Scope)
