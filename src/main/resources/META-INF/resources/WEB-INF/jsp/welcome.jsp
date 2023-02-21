@@ -3,10 +3,10 @@
 <head>
 </head>
 <body>
-	<div>Welcome :  ${name} .</div>
-	<hr>
-	<div><a href="list-todos" >Manage</a> your todos</div>
-	
+	<div class="container">
+		<h3>Welcome : ${name} .</h3>
+		<a href="list-todos">Manage</a> your todos
+	</div>
 </body>
 </form>
 </html>

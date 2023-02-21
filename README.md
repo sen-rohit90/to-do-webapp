@@ -192,3 +192,49 @@ Step 10: Using JSTL
       </tbody>
     </table>
 
+
+Step 11: Adding css, js and jquery 
+  - Making use of the pom.xml we will add the css, js, jquery min library
+  - Remember css is added at the head as we want to load it at the start
+      <head>
+        <link href="webjars/bootstrap/5.1.3/css/bootstrap.min.css"
+        rel="stylesheet">
+      </head>
+
+  - And the below towards end of </body> tag
+      	<script src="webjars/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+	      <script src="webjars/jquery/3.6.0/js/jquery.min.js"></script>
+
+  - Adding these will change how the response apprears. 
+  - Now we want to add new todos... for the same, added a button on our todo list page. 
+        <a href="add-todo" class="btn btn-success">Add Todo</a>
+
+  - On clicking this, we want to send a GET request and display a new "Add todo" page... so adding a new bean in toDoController class
+        @RequestMapping(value="add-todo", method = RequestMethod.GET)
+        public String showNewTodoPage() {
+          return "todo";
+        }
+  
+  - Now we add a POST method to take description as input
+        <form method="post">
+          Description: <input type="text" name="description"> 
+          <input type="Submit" class="btn btn-success">
+        </form>
+
+  - And to the controller class , add the below bean
+        @RequestMapping(value="add-todo", method = RequestMethod.POST)
+        public String addNewTodo(@RequestParam String description, ModelMap model) {
+          String usernmae = (String)model.get("name");
+          toDoService.addTodo(usernmae, description, LocalDate.now().plusYears(1), false);
+          return "redirect:list-todos";
+        }
+
+    Using redirect: to re-use another bean mapped as "list-todos"
+
+  - And to add a todo created a method in ToDoService class as:
+        public void addTodo(String usernmae, String description, LocalDate targetDate, boolean done) {
+          ToDo todo = new ToDo(++todosCount, usernmae, description, targetDate, done);
+          todos.add(todo);
+        }
+  
+
