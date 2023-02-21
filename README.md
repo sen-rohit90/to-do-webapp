@@ -260,7 +260,7 @@ Step 12: Adding springboot starter validation
       </form:form>
 
   - We pass in the todo attribute to modelMap in our showNewTodoPage method
-        @RequestMapping(value="add-todo", method = RequestMethod.GET)
+        @RequestMapping(value="add-todo", method = RequestMethod.GET) 
         public String showNewTodoPage(ModelMap model) {
           String usernmae = (String)model.get("name");
           ToDo todo = new ToDo(0, usernmae, "", LocalDate.now().plusYears(1), false);
@@ -268,3 +268,61 @@ Step 12: Adding springboot starter validation
           return "todo";
         } 
 
+Step 13: Validation using command bean
+  - On our toDo class, we can mark variables as Size to check for validation
+        @Size(min=10, message="Enter atleast 10 characters")
+	      private String description;
+
+  - And on the toDo jsp we can add form:errors tag to link this
+        <form:form method="post" modelAttribute="todo">
+			Description: <form:input type="text" name="description"
+				required="required" path="description" />
+			<form:errors path="description" cssClass="text-warning"/>
+			<form:input type="hidden" path="id" />
+			<form:input type="hidden" path="done" />
+			<input type="Submit" class="btn btn-success">
+		  </form:form>
+
+  - And on our getter method, we will use @Valid and @ModelAttribute to display the message as the form values is being input
+        @RequestMapping(value="add-todo", method = RequestMethod.POST)
+        public String addNewTodo(ModelMap model, @Valid @ModelAttribute("todo") ToDo todo, BindingResult result) {
+          
+          if (result.hasErrors()) {
+            return "todo";
+          }
+          String usernmae = (String)model.get("name");
+          toDoService.addTodo(usernmae, todo.getDescription(), LocalDate.now().plusYears(1), false);
+          return "redirect:list-todos";
+        }
+
+    result will store any errors we have defined with @Size 
+
+  - Now let's add delete button; add deleteTodo method in toDoService bean
+        public void deleteTodo(int id) {
+          Predicate<? super ToDo> predicate = todo -> todo.getId() == id;
+          todos.removeIf(predicate);
+        }
+
+        if the id incoming is equal to todo.getId(), only then delete items from the list. 
+
+  - Add a new bean to the controller
+        @RequestMapping("delete-todo")
+        public String deleteTodo(@RequestParam int id) {
+          
+          toDoService.deleteTodo(id);
+          return "redirect:list-todos";
+
+        }
+
+  - And the below jsp code on listTodos.jsp
+        <c:forEach items="${todos}" var="todo">
+					<tr>
+						<td>${todo.id}</td>
+						<td>${todo.description}</td>
+						<td>${todo.targetDate}</td>
+						<td>${todo.done}</td>
+						<td> <a href="delete-todo?id=${todo.id}" class="btn btn-warning">DELETE</a> </td>
+					</tr>
+				</c:forEach>
+
+        

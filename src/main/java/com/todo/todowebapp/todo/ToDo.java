@@ -2,13 +2,9 @@ package com.todo.todowebapp.todo;
 
 import java.time.LocalDate;
 
-public class ToDo {
+import jakarta.validation.constraints.Size;
 
-	private int id;
-	private String username;
-	private String description;
-	private LocalDate targetDate;
-	private boolean done;
+public class ToDo {
 
 	public ToDo(int id, String username, String description, LocalDate targetData, boolean done) {
 		super();
@@ -18,6 +14,16 @@ public class ToDo {
 		this.targetDate = targetData;
 		this.done = done;
 	}
+	
+	private int id;
+	private String username;
+	
+	@Size(min=10, message="Enter atleast 10 characters")
+	private String description;
+	private LocalDate targetDate;
+	private boolean done;
+
+
 
 	public int getId() {
 		return id;
