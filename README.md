@@ -156,4 +156,39 @@ Step 09: Here on our project begins... Creating Todo and TodoService
           </form>
         </html>
 
-- Via SessionAttribute, persisted the variable values to multiple web pages (Session Scope)
+- Via SessionAttribute, persisted the variable values to multiple web pages (Session Scope). More on this later.
+
+Step 10: Using JSTL 
+- We see on the response html, the following - 
+
+  Welcome .
+  Your to dos are : [ToDo [id=1, username=in28mins, description=Learn AWS, targetData=2024-02-21, done=false], ToDo [id=1, username=in28mins, description=Learn DevOps, targetData=2025-02-21, done=false], ToDo [id=1, username=in28mins, description=Learn Full Stack, targetData=2026-02-21, done=false]] .
+
+  The ${todos} has three rows with columns as id, username, description, targetDate, done. 
+
+  Making use of JSTL for each method, lets display this into a table. 
+
+- Add a header to import jstl uri
+  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+- Add a table with c:forEach jstl tag to scan through the rows and display on table like so:
+    <table>
+      <thead></thead>
+      <tbody>
+        <tr>
+          <th>id</th>
+          <th>Description</th>
+          <th>Target Date</th>
+          <th>is Done?</th>
+        </tr>
+        <c:forEach items="${todos}" var="todo">
+          <tr>
+            <td>${todo.id}</td>
+            <td>${todo.description}</td>
+            <td>${todo.targetDate}</td>
+            <td>${todo.done}</td>
+          </tr>
+        </c:forEach>
+      </tbody>
+    </table>
+

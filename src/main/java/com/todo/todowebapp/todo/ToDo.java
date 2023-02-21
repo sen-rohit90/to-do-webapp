@@ -7,7 +7,7 @@ public class ToDo {
 	private int id;
 	private String username;
 	private String description;
-	private LocalDate targetData;
+	private LocalDate targetDate;
 	private boolean done;
 
 	public ToDo(int id, String username, String description, LocalDate targetData, boolean done) {
@@ -15,7 +15,7 @@ public class ToDo {
 		this.id = id;
 		this.username = username;
 		this.description = description;
-		this.targetData = targetData;
+		this.targetDate = targetData;
 		this.done = done;
 	}
 
@@ -43,12 +43,12 @@ public class ToDo {
 		this.description = description;
 	}
 
-	public LocalDate getTargetData() {
-		return targetData;
+	public LocalDate getTargetDate() {
+		return targetDate;
 	}
 
-	public void setTargetData(LocalDate targetData) {
-		this.targetData = targetData;
+	public void setTargetDate(LocalDate targetData) {
+		this.targetDate = targetDate;
 	}
 
 	public boolean isDone() {
@@ -62,7 +62,7 @@ public class ToDo {
 	@Override
 	public String toString() {
 		return "ToDo [id=" + id + ", username=" + username + ", description=" + description + ", targetData="
-				+ targetData + ", done=" + done + "]";
+				+ targetDate + ", done=" + done + "]";
 	}
 
 }

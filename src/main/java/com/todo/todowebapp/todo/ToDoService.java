@@ -11,8 +11,8 @@ public class ToDoService {
 	private static List<ToDo> todos = new ArrayList();
 	static {
 		todos.add(new ToDo(1, "in28mins", "Learn AWS", LocalDate.now().plusYears(1), false));
-		todos.add(new ToDo(1, "in28mins", "Learn DevOps", LocalDate.now().plusYears(2), false));
-		todos.add(new ToDo(1, "in28mins", "Learn Full Stack", LocalDate.now().plusYears(3), false));
+		todos.add(new ToDo(2, "in28mins", "Learn DevOps", LocalDate.now().plusYears(2), false));
+		todos.add(new ToDo(3, "in28mins", "Learn Full Stack", LocalDate.now().plusYears(3), false));
 
 	}
 
